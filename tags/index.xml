@@ -5,7 +5,7 @@
     <link>/tags/</link>
       <atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 06 Jan 2020 18:58:22 -0300</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huab70fe7c723e86c2f798430df322c2d8_42061_512x512_fill_lanczos_center_2.png</url>
       <title>Tags</title>
@@ -13,18 +13,34 @@
     </image>
     
     <item>
-      <title>Data Analysis</title>
-      <link>/tags/data-analysis/</link>
-      <pubDate>Mon, 06 Jan 2020 18:58:22 -0300</pubDate>
-      <guid>/tags/data-analysis/</guid>
+      <title>Differential Privacy</title>
+      <link>/tags/differential-privacy/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/differential-privacy/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Differential Privacy</title>
-      <link>/tags/differential-privacy/</link>
+      <title>GAN</title>
+      <link>/tags/gan/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/gan/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TensorFlow</title>
+      <link>/tags/tensorflow/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/tags/tensorflow/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Analysis</title>
+      <link>/tags/data-analysis/</link>
       <pubDate>Mon, 06 Jan 2020 18:58:22 -0300</pubDate>
-      <guid>/tags/differential-privacy/</guid>
+      <guid>/tags/data-analysis/</guid>
       <description></description>
     </item>
     

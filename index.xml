@@ -5,12 +5,55 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Ricardo Carvalho</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 06 Jan 2020 18:58:22 -0300</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Wed, 29 Jan 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huab70fe7c723e86c2f798430df322c2d8_42061_512x512_fill_lanczos_center_2.png</url>
       <title>Ricardo Carvalho</title>
       <link>/</link>
     </image>
+    
+    <item>
+      <title>DP-CGAN: Differentially Private Conditional GAN on TensorFlow 2 explained</title>
+      <link>/post/dpcgan/</link>
+      <pubDate>Wed, 29 Jan 2020 00:00:00 +0000</pubDate>
+      <guid>/post/dpcgan/</guid>
+      <description>&lt;p&gt;Below we give a jupyter notebook containing the implementation of a Differentially Private Conditional GAN, originally described on Torkzadehmahani et al. 2019, with explanation of every step implemented.&lt;/p&gt;
+&lt;p&gt;We include a TensorFlow 2 version implemented from scratch, using the Keras API and a tf.GradientTape training loop. Also to successfully use DP on a Conditional GAN, we design a custom optimizer. Experiments used the MNIST dataset.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Pre-requisites&lt;/strong&gt;: (see links on notebook for suggestions of references)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Generative Adversarial Networks (GANs)&lt;/li&gt;
+&lt;li&gt;Differential Privacy (DP), especially DP-SGD&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;We focus on the hypothetical scenario where&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Training data is considered sensitive.&lt;/li&gt;
+&lt;li&gt;We aim to release a &amp;ldquo;safe&amp;rdquo; version (that does not compromise privacy) of the training data to the public.&lt;/li&gt;
+&lt;li&gt;The goal is to allow external people to use the &amp;ldquo;safe&amp;rdquo; training data to create a classification model that performs well on the real testing data.
+&lt;ul&gt;
+&lt;li&gt;Therefore, we validate our GANs by creating models on the generated data and measuring performance.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If you intend to use any GAN with DP please consider the following notes.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;div style=&#39;color:red&#39;&gt;Important notes about using DP with GANs:&lt;/div&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Usually the Generator is trained without DP, therefore we cannot show the data labels to the Generator. We sample labels uniformly at random on each training step.&lt;/li&gt;
+&lt;li&gt;Although the notebook shows the one training, to report results we should train it many times from scratch and show averaged results, not maximum or single result.&lt;/li&gt;
+&lt;li&gt;Our Validation uses the training data again to evaluate the GAN. To be 100% DP, we need to either pay some privacy budget for this step, or just use the actual generated data with cross validation for evalution.&lt;/li&gt;
+&lt;li&gt;When generating data for creating classification models, we create the same amount of data for each label. Using the real test distribution of labels to determine the number of examples generated for each label assumes this information is public, which is rarely the case.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Links&lt;/strong&gt;:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a target=&#34;_blank&#34; href=&#34;https://colab.research.google.com/github/ricardocarvalhods/dpcgan/blob/master/DP_CGAN_MNIST.ipynb&#34;&gt;Open directly on Google Colab by clicking here&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;It takes 3+ hours to run the experiment completely once on Google Colab GPU&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ricardocarvalhods/dpcgan&#34;&gt;Github repository (with more info about method)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ricardocarvalhods/dpcgan/blob/master/DP_CGAN_MNIST.ipynb&#34;&gt;Jupyter Notebook&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Differentially Private Top-k Selection for Unknown Data Domain</title>
@@ -45,6 +88,21 @@
       <pubDate>Sat, 14 Dec 2019 19:29:28 -0300</pubDate>
       <guid>/publication/winning-privately-the-differentially-private-lottery-ticket-mechanism/</guid>
       <description>&lt;p&gt;This is a work in progress presented at the Workshop on Machine Learning with Guarantees, part of NeurIPS 2019, as a &lt;strong&gt;POSTER&lt;/strong&gt;.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Poster accepted to Workshop on ML with Guarantees at NeurIPS 2019</title>
+      <link>/news/workshop19/</link>
+      <pubDate>Wed, 11 Dec 2019 00:00:00 +0000</pubDate>
+      <guid>/news/workshop19/</guid>
+      <description>&lt;p&gt;This is a work in progress presented at the Workshop on Machine Learning with Guarantees, part of NeurIPS 2019, as a POSTER.&lt;/p&gt;
+&lt;p&gt;My colleague Lovedeep Gondara will present it on Saturday, Dec 14th, at the Workshop on Machine Learning with Guarantees (NeurIPS 19):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;u&gt;Title&lt;/u&gt;: Winning Privately: The Differentially Private Lottery Ticket Mechanism&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;Authors&lt;/u&gt;: Lovedeep Gondara, Ke Wang, &lt;strong&gt;Ricardo Silva Carvalho&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;u&gt;Conference&lt;/u&gt;: Workshop on Machine Learning with Guarantees, at the 33rd Conference on Neural Information Processing Systems (&lt;strong&gt;NeurIPS 2019&lt;/strong&gt;).&lt;/li&gt;
+&lt;/ul&gt;
 </description>
     </item>
     
