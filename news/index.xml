@@ -5,7 +5,7 @@
     <link>/news/</link>
       <atom:link href="/news/index.xml" rel="self" type="application/rss+xml" />
     <description>News</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 06 Jan 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><lastBuildDate>Mon, 24 Feb 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/images/icon_huab70fe7c723e86c2f798430df322c2d8_42061_512x512_fill_lanczos_center_2.png</url>
       <title>News</title>
@@ -13,19 +13,13 @@
     </image>
     
     <item>
-      <title>Paper accepted to AISTATS 2020 on differentially private top-k selection</title>
+      <title>Withdraw of paper accepted to AISTATS 2020 on differentially private top-k selection</title>
       <link>/news/aistats20/</link>
-      <pubDate>Mon, 06 Jan 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Feb 2020 00:00:00 +0000</pubDate>
       <guid>/news/aistats20/</guid>
-      <description>&lt;p&gt;After an entire year of doing research on Differential Privacy, I had my first paper as a Ph.D. student accepted to an important conference: AISTATS.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;u&gt;Title&lt;/u&gt;: Differentially Private Top-k Selection for Unknown Data Domain&lt;/li&gt;
-&lt;li&gt;&lt;u&gt;Authors&lt;/u&gt;: &lt;strong&gt;Ricardo Silva Carvalho&lt;/strong&gt;, Ke Wang, Lovedeep Gondara&lt;/li&gt;
-&lt;li&gt;&lt;u&gt;Conference&lt;/u&gt;: AISTATS 2020, the 23rd International Conference on Artificial Intelligence and Statistics&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;I&#39;m now updating the latest version to address reviewers&amp;rsquo; comments and will soon release the full final paper.&lt;/p&gt;
-&lt;p&gt;We also have extensive code to reproduce all the results, in python with notebooks to simplify understanding.&lt;/p&gt;
-&lt;p&gt;Stay tuned!&lt;/p&gt;
+      <description>&lt;p&gt;We decided to withdraw our paper &amp;ldquo;Differentially Private Top-k Selection for Unknown Data Domain&amp;rdquo; accepted to AISTATS 2020. Unfortunately, we found an error with the main algorithm created, which invalidates the claims related to it. For this reason, we decided to retract the paper before creating a camera-ready version.&lt;/p&gt;
+&lt;p&gt;Nonetheless, we continue our research on the topic.&lt;/p&gt;
+&lt;p&gt;Finally, we&#39;d like to thank LinkedIn engineers David Durfee and Ryan Rogers for invaluable discussions.&lt;/p&gt;
 </description>
     </item>
     

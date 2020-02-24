@@ -29,26 +29,18 @@
     </item>
     
     <item>
-      <title>Data Analysis</title>
-      <link>/categories/data-analysis/</link>
-      <pubDate>Mon, 06 Jan 2020 18:58:22 -0300</pubDate>
-      <guid>/categories/data-analysis/</guid>
+      <title>Deep Learning</title>
+      <link>/categories/deep-learning/</link>
+      <pubDate>Sat, 14 Dec 2019 19:29:28 -0300</pubDate>
+      <guid>/categories/deep-learning/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Differential Privacy</title>
       <link>/categories/differential-privacy/</link>
-      <pubDate>Mon, 06 Jan 2020 18:58:22 -0300</pubDate>
-      <guid>/categories/differential-privacy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Deep Learning</title>
-      <link>/categories/deep-learning/</link>
       <pubDate>Sat, 14 Dec 2019 19:29:28 -0300</pubDate>
-      <guid>/categories/deep-learning/</guid>
+      <guid>/categories/differential-privacy/</guid>
       <description></description>
     </item>
     
