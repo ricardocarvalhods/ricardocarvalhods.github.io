@@ -18,8 +18,16 @@
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-    <style type="text/css">
+    <style type="text/css">      
+      .date_td {
+        width:120px;
+        text-align:right;
+        padding-right:20px !important;
+      }
       .big-icon {
         font-size: 24px;
         padding-right: 5px;
@@ -27,12 +35,6 @@
       body {
         padding-top: 20px;
         padding-bottom: 40px;
-      }
-      .btn-group-xs > .btn, .btn-xs {
-        padding: .35rem .6rem;
-        font-size: 0.8rem;
-        line-height: .5;
-        border-radius: .2rem;
       }
       body {
         font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, “Helvetica Neue”, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
@@ -66,7 +68,7 @@
       <div class="row">
         <div class="col-md-8">
           <p>
-            I am a Computer Science PhD student at
+            I am a Computer Science Ph.D. student at
             <a target="_blank" href="http://www.sfu.ca/computing.html"
               >Simon Fraser University (SFU)</a
             >
@@ -83,8 +85,7 @@
           </p>
           <p>
             From 2012 to 2018, I was a Senior Data Scientist for the Brazilian
-            Government, where for almost a year I worked as Data Science
-            Manager.
+            Government, where for almost a year I worked as a Lead Data Scientist.
           </p>
           <p>
             I have a M.Sc. in Computer Science from
@@ -134,55 +135,70 @@
           />
         </div>
       </div>
-      <div class="row">
-        <div class="col">
-          <hr/>
-          <h5>
-            News
-          </h5>
+      <div>
+        <br/>
+        <ul class="nav nav-tabs">
           
-          <ul>
-            <li><b>Aug 04, 2022</b>: I have presented my Thesis Proposal.</li>
-            <li><b>Dec 07, 2021</b>: I will be serving as a <b>PC member</b> for the research track of <a target="_blank" href="https://kdd.org/kdd2022/">KDD 2022</a>.</li>
-            <li><b>Dec 01, 2021</b>: Paper "Incorporating Item Frequency for Differentially Private Set Union" was accepted to <a target="_blank" href="https://aaai.org/Conferences/AAAI-22/">AAAI 2022</a>.</li>
-            <li><b>Oct 11, 2021</b>: Paper "Differentially Private Ensemble Classifiers for Data Streams" was accepted to <a target="_blank" href="https://www.wsdm-conference.org/2022/">WSDM 2022</a>.</li>
-            <li><b>Aug 19, 2021</b>: I will be serving as a <b>PC member</b> for the Fifteenth International Conference on Web Search and Data Mining (<a target="_blank" href="https://www.wsdm-conference.org/2022/">WSDM 2022</a>).</li>
-            <li><b>Jul 12, 2021</b>: Paper "Training Differentially Private Neural Networks With Lottery Tickets" was accepted to <a target="_blank" href="https://esorics2021.athene-center.de/index.php">ESORICS 2021</a>.</li>
-            <li><b>Jul 08, 2021</b>: Paper "TEM: High Utility Metric Differential Privacy on Text" was accepted to the <a target="_blank" href="https://tpdp.journalprivacyconfidentiality.org/2021/">ICML 2021 Workshop on Theory and Practice of Differential Privacy</a>.</li>
-            <li><b>Jul 01, 2021</b>: Paper "BRR: Preserving Privacy of Text Data Efficiently on Device" was accepted to the <a target="_blank" href="https://sites.google.com/view/ml4data/home">ICML 2021 Workshop on Machine Learning for Data</a>.</li>
-            <li><b>Nov 30, 2020</b>: I will be serving as a <b>PC member</b> for the research track of <a target="_blank" href="https://kdd.org/kdd2021/">KDD 2021</a>.</li>
-            <li><b>Nov 24, 2020</b>: I am giving a talk about differential privacy for the graduate data mining class at Simon Fraser University (SFU).</li>
-            <li><b>Sep 21, 2020</b>: Our paper <b>"BRR: Preserving Privacy of Text Data Efficiently on Device"</b> received a <b style='color:red'>best paper award</b> at the Shareable NLP Technologies workshop at Amazon's internal ML conference (<a target="_blank" href="https://www.amazon.science/working-at-amazon/amazons-internal-conferences-build-a-sense-of-community-kevin-small">AMLC 2020</a>)!</li>
-            <li><b>May 14, 2020</b>: Paper "Differentially Private Top-k Selection via Stability on Unknown Domain" was accepted to <a target="_blank" href="http://auai.org/uai2020/">UAI 2020</a>!</li>
-            <li><b>Feb 17, 2020</b>: I will be joining <a target="_blank" href="https://aws.amazon.com/sagemaker/">Amazon</a> during this Summer as an Applied Scientist Intern!</li>
-            <li><b>Dec 11, 2019</b>: I presented my current work on differentially private GANs at the <a target="_blank" href="https://www.sfu.ca/computing/newsandevents/2019/bc-ai-student-showcase.html">BC AI Student Showcase 2019</a>.</li>
-            <li><b>Nov 24, 2019</b>: I have been selected as student volunteer for <a target="_blank" href="https://neurips.cc/Conferences/2019">NeurIPS 2019</a>.</li>
-            <li><b>Oct 01, 2019</b>: Poster on differentially private lottery ticket accepted to Workshop on <a target="_blank" href="https://sites.google.com/view/mlwithguarantees">Machine Learning with Guarantees</a> at NeurIPS 2019!</li>
-          </ul>
+          <li role="presentation" class="active"><a data-toggle="pill" href="#menu_news"><b>News</b></a></li>
+          <li role="presentation"><a data-toggle="pill" href="#menu_research"><b>Research</b></a></li>
+          <li role="presentation"><a data-toggle="pill" href="#menu_activities"><b>Activities</b></a></li>
+        </ul>
+      </div>
+      <div class="tab-content">
+      <div id="menu_news" class="tab-pane active">
+        <div class="col">
+          <br/>
+          <table class="table table-condensed table-striped">
+          
+          <tbody>
+            <tr><td class="date_td">Dec 26, 2022</td><td> Paper "TEM: High Utility Metric Differential Privacy on Text" was accepted to <a target="_blank" href="https://www.siam.org/conferences/cm/conference/sdm23">SDM 2023</a>.</td></tr>
+            <tr><td class="date_td">Aug 04, 2022</td><td> I have presented my Thesis Proposal.</td></tr>
+            <tr><td class="date_td">Dec 07, 2021</td><td> I will be serving as a <b>PC member</b> for the research track of <a target="_blank" href="https://kdd.org/kdd2022/">KDD 2022</a>.</td></tr>
+            <tr><td class="date_td">Dec 01, 2021</td><td> Paper "Incorporating Item Frequency for Differentially Private Set Union" was accepted to <a target="_blank" href="https://aaai.org/Conferences/AAAI-22/">AAAI 2022</a>.</td></tr>
+            <tr><td class="date_td">Oct 11, 2021</td><td> Paper "Differentially Private Ensemble Classifiers for Data Streams" was accepted to <a target="_blank" href="https://www.wsdm-conference.org/2022/">WSDM 2022</a>.</td></tr>
+            <tr><td class="date_td">Aug 19, 2021</td><td> I will be serving as a <b>PC member</b> for the Fifteenth International Conference on Web Search and Data Mining (<a target="_blank" href="https://www.wsdm-conference.org/2022/">WSDM 2022</a>).</td></tr>
+            <tr><td class="date_td">Jul 12, 2021</td><td> Paper "Training Differentially Private Neural Networks With Lottery Tickets" was accepted to <a target="_blank" href="https://esorics2021.athene-center.de/index.php">ESORICS 2021</a>.</td></tr>
+            <tr><td class="date_td">Jul 08, 2021</td><td> Paper "TEM: High Utility Metric Differential Privacy on Text" was accepted to the <a target="_blank" href="https://tpdp.journalprivacyconfidentiality.org/2021/">ICML 2021 Workshop on Theory and Practice of Differential Privacy</a>.</td></tr>
+            <tr><td class="date_td">Jul 01, 2021</td><td> Paper "BRR: Preserving Privacy of Text Data Efficiently on Device" was accepted to the <a target="_blank" href="https://sites.google.com/view/ml4data/home">ICML 2021 Workshop on Machine Learning for Data</a>.</td></tr>
+            <tr><td class="date_td">Nov 30, 2020</td><td> I will be serving as a <b>PC member</b> for the research track of <a target="_blank" href="https://kdd.org/kdd2021/">KDD 2021</a>.</td></tr>
+            <tr><td class="date_td">Nov 24, 2020</td><td> I am giving a talk about differential privacy for the graduate data mining class at Simon Fraser University (SFU).</td></tr>
+            <tr><td class="date_td">Sep 21, 2020</td><td> Our paper <b>"BRR: Preserving Privacy of Text Data Efficiently on Device"</b> received a <b style='color:red'>best paper award</b> at the Shareable NLP Technologies workshop at Amazon's internal ML conference (<a target="_blank" href="https://www.amazon.science/working-at-amazon/amazons-internal-conferences-build-a-sense-of-community-kevin-small">AMLC 2020</a>)!</td></tr>
+            <tr><td class="date_td">May 14, 2020</td><td> Paper "Differentially Private Top-k Selection via Stability on Unknown Domain" was accepted to <a target="_blank" href="http://auai.org/uai2020/">UAI 2020</a>!</td></tr>
+            <tr><td class="date_td">Feb 17, 2020</td><td> I will be joining <a target="_blank" href="https://aws.amazon.com/sagemaker/">Amazon</a> during this Summer as an Applied Scientist Intern!</td></tr>
+            <tr><td class="date_td">Dec 11, 2019</td><td> I presented my current work on differentially private GANs at the <a target="_blank" href="https://www.sfu.ca/computing/newsandevents/2019/bc-ai-student-showcase.html">BC AI Student Showcase 2019</a>.</td></tr>
+            <tr><td class="date_td">Nov 24, 2019</td><td> I have been selected as student volunteer for <a target="_blank" href="https://neurips.cc/Conferences/2019">NeurIPS 2019</a>.</td></tr>
+            <tr><td class="date_td">Oct 01, 2019</td><td> Poster on differentially private lottery ticket accepted to Workshop on <a target="_blank" href="https://sites.google.com/view/mlwithguarantees">Machine Learning with Guarantees</a> at NeurIPS 2019!</td></tr>
+          </tbody>
+        </table>
         </div>
       </div>
-      <div class="row">
+      <div id="menu_research" class="tab-pane">
         <div class="col">
-          <hr/>
-          <h5>
-            Recent Research
-          </h5>
+          <br/>
           <p>
             Please see complete list of publications <a target="_blank" href="https://scholar.google.com/citations?user=V8v6VckAAAAJ&hl=en">here</a>.
           </p>
           <ul>
             <li><p>
+              <b>TEM: High Utility Metric Differential Privacy on Text</b> <br/>
+              <b>Ricardo Silva Carvalho *</b>, Theodore Vasiloudis, Oluwaseyi Feyisetan, Ke Wang --- <i>* Work done during an internship at Amazon</i> <br/>
+              SIAM International Conference on Data Mining (<a href="https://www.siam.org/conferences/cm/conference/sdm23">SDM 2023</a>) <br/>
+              Workshop on Theory and Practice of Differential Privacy (<a target="_blank" href="https://tpdp.journalprivacyconfidentiality.org/2021/">TPDP 2021</a>) at <a target="_blank" href="https://icml.cc/Conferences/2021/">ICML 2021</a> <br/>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://arxiv.org/abs/2107.07928">Paper</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://www.amazon.science/publications/tem-high-utility-metric-differential-privacy-on-text">Amazon Science</a>
+              </p></li>
+            <li><p>
               <b>Incorporating Item Frequency for Differentially Private Set Union</b> <br/>
               <b>Ricardo Silva Carvalho</b>, Ke Wang, Lovedeep Gondara <br/>
               AAAI Conference on Artificial Intelligence (<a href="https://aaai.org/Conferences/AAAI-22/">AAAI 2022</a>) <br/>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://ojs.aaai.org/index.php/AAAI/article/view/21183">Paper</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/diff-private-set-union">Code</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://ojs.aaai.org/index.php/AAAI/article/view/21183">Paper</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/diff-private-set-union">Code</a>
               </p></li>
             <li><p>
               <b>Differentially Private Ensemble Classifiers for Data Streams</b> <br/>
               Lovedeep Gondara, Ke Wang, <b>Ricardo Silva Carvalho</b><br/>
               ACM International WSDM Conference (<a href="https://www.wsdm-conference.org/2022">WSDM 2022</a>) <br/>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://arxiv.org/abs/2112.04640">Paper</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://arxiv.org/abs/2112.04640">Paper</a>
               
               </p></li>
             <li><p>
@@ -190,61 +206,52 @@
               <b>Ricardo Silva Carvalho *</b>, Theodore Vasiloudis, Oluwaseyi Feyisetan --- <i>* Work done during an internship at Amazon</i> <br/>
               Workshop on Machine Learning for Data (<a target="_blank" href="https://sites.google.com/view/ml4data/home">ML4Data 2021</a>) at <a target="_blank" href="https://icml.cc/Conferences/2021/">ICML 2021</a> <br/>
               Workshop on Shareable NLP Technologies at Amazon's Machine Learning Conference (<a target="_blank" href="https://www.amazon.science/working-at-amazon/amazons-internal-conferences-build-a-sense-of-community-kevin-small">AMLC 2020</a>) - <b style='color:red'>best paper award</b> <br/>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://arxiv.org/abs/2107.07923">Paper</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://www.amazon.science/publications/brr-preserving-privacy-of-text-data-efficiently-on-device">Amazon Science</a>
-              </p></li>
-            <li><p>
-              <b>TEM: High Utility Metric Differential Privacy on Text</b> <br/>
-              <b>Ricardo Silva Carvalho *</b>, Theodore Vasiloudis, Oluwaseyi Feyisetan --- <i>* Work done during an internship at Amazon</i> <br/>
-              Workshop on Theory and Practice of Differential Privacy (<a target="_blank" href="https://tpdp.journalprivacyconfidentiality.org/2021/">TPDP 2021</a>) at <a target="_blank" href="https://icml.cc/Conferences/2021/">ICML 2021</a> <br/>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://arxiv.org/abs/2107.07928">Paper</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://www.amazon.science/publications/tem-high-utility-metric-differential-privacy-on-text">Amazon Science</a>
-              </p></li>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://arxiv.org/abs/2107.07923">Paper</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://www.amazon.science/publications/brr-preserving-privacy-of-text-data-efficiently-on-device">Amazon Science</a>
+              </p></li>            
             <li><p>
               <b>Differentially Private Top-k Selection via Stability on Unknown Domain</b> <br/>
               <b>Ricardo Silva Carvalho</b>, Ke Wang, Lovedeep Gondara, Chunyan Miao <br/>
               Conference on Uncertainty in Artificial Intelligence (<a href="http://auai.org/uai2020/">UAI 2020</a>) <br/>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="http://auai.org/uai2020/proceedings/459_main_paper.pdf">Paper</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/diff-priv-top-k-stability/blob/master/paper.pdf">Supplementary File</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://slideslive.com/38932174/differentially-private-topk-selection-via-stability-on-unknown-domain">Video</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/diff-priv-top-k-stability">Code</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="http://auai.org/uai2020/proceedings/459_main_paper.pdf">Paper</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/diff-priv-top-k-stability/blob/master/paper.pdf">Supplementary File</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://slideslive.com/38932174/differentially-private-topk-selection-via-stability-on-unknown-domain">Video</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/diff-priv-top-k-stability">Code</a>
               </p></li>
             <li><p>
               <b>Training Differentially Private Neural Networks With Lottery Tickets</b> <br/>
               Lovedeep Gondara, <b>Ricardo Silva Carvalho</b>, Ke Wang<br/>
               European Symposium on Research in Computer Security (<a href="https://esorics2021.athene-center.de/index.php">ESORICS 2021</a>) <br/>
               <a target="_blank" href="https://sites.google.com/view/mlwithguarantees">Workshop on Machine Learning with Guarantees</a> at <a target="_blank" href="https://nips.cc/Conferences/2019">NeurIPS 2019</a> <br/>
-              <a target="_blank" type="button" class="btn btn-outline-dark btn-xs" href="https://arxiv.org/pdf/2002.11613.pdf">Extended Abstract</a>
-              <a type="button" target="_blank" class="btn btn-outline-dark btn-xs" href="https://link.springer.com/chapter/10.1007/978-3-030-88428-4_27">Paper</a>
+              <a target="_blank" type="button" class="btn btn-default btn-xs" href="https://arxiv.org/pdf/2002.11613.pdf">Extended Abstract</a>
+              <a type="button" target="_blank" class="btn btn-default btn-xs" href="https://link.springer.com/chapter/10.1007/978-3-030-88428-4_27">Paper</a>
               </p></li>
             <li><p>
               <b>Privacy-Preserving Publication of Sensitive Data using Differentially Private GANs</b> <br/>
               <b>Ricardo Silva Carvalho</b><br/>
               <a target="_blank" href="https://www.sfu.ca/computing/newsandevents/2019/bc-ai-student-showcase.html">BC AI Student Showcase 2019</a> <br/>
-              <a target="_blank" type="button" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/dpcgan/blob/master/Poster.pdf">Poster</a>
-              <a target="_blank" type="button" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/dpcgan/blob/master/report.pdf">Report</a>
-              <a target="_blank" type="button" class="btn btn-outline-dark btn-xs" href="https://github.com/ricardocarvalhods/dpcgan">Code</a>
+              <a target="_blank" type="button" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/dpcgan/blob/master/Poster.pdf">Poster</a>
+              <a target="_blank" type="button" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/dpcgan/blob/master/report.pdf">Report</a>
+              <a target="_blank" type="button" class="btn btn-default btn-xs" href="https://github.com/ricardocarvalhods/dpcgan">Code</a>
               </p></li>
             <li><p>
               <b>A Text Classification Model to Identify Performance Bonds Requirement in Public Bidding Notices.</b> <br/>
               Urias Cruz da Cunha, <b>Ricardo Silva Carvalho</b>, Alexandre Zaghetto<br/>
               Future of Information and Communication Conference (<a target="_blank" href="https://saiconference.com/Conferences/FICC2020">FICC 2020</a>) <br/>
-              <a target="_blank" type="button" class="btn btn-outline-dark btn-xs" href="https://link.springer.com/chapter/10.1007/978-3-030-39442-4_50">Paper</a>
+              <a target="_blank" type="button" class="btn btn-default btn-xs" href="https://link.springer.com/chapter/10.1007/978-3-030-39442-4_50">Paper</a>
               </p></li>
           </ul>
         </div>
       </div>
-      <div class="row">
+      <div id="menu_activities" class="tab-pane">
         <div class="col">
-          <hr/>
-          <h5>
-            Relevant Activities
-          </h5>
+          <br/>
           <ul>
             <li>External reviewer or PC member for AI/ML/DM conferences: KDD 2022, AISTATS 2022, WSDM 2022, ICDM 2021, KDD 2021, WSDM 2021, IEEE BigData 2020, KDD 2020, ICDM 2020, ICDE 2020.</li>
             <li>Only Teaching Assistant (TA) for the Data Mining course at Simon Fraser University (SFU) with more than 80 undergraduate students enrolled.</li>
           </ul>
         </div>
+      </div>
       </div>
     </div>
     <!-- /container -->
