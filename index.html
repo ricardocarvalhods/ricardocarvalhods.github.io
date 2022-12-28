@@ -21,6 +21,23 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
         
     <style type="text/css">      
       .date_td {
@@ -51,6 +68,25 @@
         /* default is 1rem or 16px */
         font-size: 16px;
       }
+        
+        
+      .modal {
+  padding: 0 !important; // override inline padding-right added from js
+}
+.modal .modal-dialog {
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  margin: 0;
+}
+.modal .modal-content {
+  height: 100%;
+  border: 0;
+  border-radius: 0;
+}
+.modal .modal-body {
+  overflow-y: auto;
+}
     </style>
     
     <title>Ricardo Silva Carvalho</title>
@@ -125,8 +161,10 @@
           
           <li role="presentation" class="active"><a data-toggle="pill" href="#menu_news"><b><span class="glyphicon glyphicon-flash" aria-hidden="true"></span> News</b></a></li>
           <li role="presentation"><a data-toggle="pill" href="#menu_research"><b><span class="glyphicon glyphicon-book" aria-hidden="true"></span>&nbsp; Publications</b></a></li>
-          <li role="presentation"><a data-toggle="pill" href="#menu_topk"><b><span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>&nbsp; DP Database Queries</b></a></li>
-          <!--<li role="presentation"><a data-toggle="pill" href="#menu_text"><b><span class="glyphicon glyphicon-random" aria-hidden="true"></span>&nbsp; DP Text</b></a></li>
+          <li role="presentation"><a data-toggle="pill" href="#menu_dpsu"><b><span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>&nbsp; DP SQL Queries</b></a></li>
+          
+          <!--<li role="presentation"><a data-toggle="pill" href="#menu_topk"><b><span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>&nbsp; DP Ranking Queries</b></a></li>
+          <li role="presentation"><a data-toggle="pill" href="#menu_text"><b><span class="glyphicon glyphicon-random" aria-hidden="true"></span>&nbsp; DP Text</b></a></li>
           <li role="presentation"><a data-toggle="pill" href="#menu_synth"><b><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>&nbsp; DP Synthetic Data <span style="background-color:yellow;color:dark-gray;border-style:solid;border-width:1px;" class="btn-xs" aria-hidden="true" disabled>Updated!</span></b></a></li>-->
           <li role="presentation"><a data-toggle="pill" href="#menu_activities"><b><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp; Others</b></a></li>
         </ul>
@@ -138,7 +176,7 @@
           <table class="table table-condensed table-striped">
           
           <tbody>
-            <tr><td class="date_td">Dec 27, 2022</td><td> I am honored to have been nominated by SFU to attend the <a href="https://www.heidelberg-laureate-forum.org/" target="_blank">10th Heidelberg Laureate Forum</a> in Germany. There is only <b>one nomination</b> from the entire university. Students meet the recipients of the most prestigious awards in mathematics and computer science in the Forum.</td></tr>
+            <tr><td class="date_td">Dec 27, 2022</td><td> I am honored to have been nominated by SFU to attend the <a href="https://www.heidelberg-laureate-forum.org/" target="_blank">10th Heidelberg Laureate Forum</a> in Germany. There is only <b>one nomination</b> from the entire university. Students meet the recipients of the most prestigious awards in mathematics and computer science.</td></tr>
             <tr><td class="date_td">Dec 26, 2022</td><td> Paper "TEM: High Utility Metric Differential Privacy on Text" was accepted to <a target="_blank" href="https://www.siam.org/conferences/cm/conference/sdm23">SDM 2023</a>.</td></tr>
             <tr><td class="date_td">Aug 04, 2022</td><td> I have presented my Thesis Proposal.</td></tr>
             <tr><td class="date_td">Dec 07, 2021</td><td> I will be serving as a <b>PC member</b> for the research track of <a target="_blank" href="https://kdd.org/kdd2022/">KDD 2022</a>.</td></tr>
@@ -243,9 +281,20 @@
         </table>          
         </div>
       </div>
+      <div id="menu_dpsu" class="tab-pane">
+        <div class="col">
+          <script> 
+            $(document).ready(function(){
+              $(function(){
+                $("#page_setunion").load("setunion.html"); 
+              });
+            });
+          </script>
+          <div id="page_setunion"></div>
+        </div>
+      </div>
       <div id="menu_topk" class="tab-pane">
         <div class="col">
-          <br/>
           <script> 
             $(document).ready(function(){
               $(function(){
@@ -283,10 +332,6 @@
       integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
       crossorigin="anonymous"
     ></script>
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
+    
   </body>
 </html>
