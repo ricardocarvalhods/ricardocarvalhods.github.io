@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+    
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+    <style type="text/css">      
+      .date_td {
+        width:120px;
+        text-align:right;
+        padding-right:20px !important;
+      }
+      .big-icon {
+        font-size: 24px;
+        padding-right: 5px;
+      }
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, “Helvetica Neue”, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
+        /* default is 1rem or 16px */
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      /* Increase all font sizes on mobile */
+      @media (max-width: 767px) { 
+
+      body {
+        /* default is 1rem or 16px */
+        font-size: 16px;
+      }
+    </style>
+    
+    <title>Ricardo Silva Carvalho</title>
+    
+  </head>
+  <body>
+    
+    <div class="container">
+      <br/>
+      <h1>Differentially Private SQL Queries<hr></h1>
+      <p>To answer SQL queries to a database while satisfying Differential Privacy (DP), my research focused on the <b>ubiquitous</b> problem of performing <b>GROUP BY queries</b> - more specifically the privacy aspects of releasing the <b>partitions</b> of such aggregate queries.
+      </p>
+      <ul>
+        <li><b style="color:a">[PAPER]</b>: The work described below was published at <b>AAAI 2022</b> and be can be found <a target="_blank" href="https://ojs.aaai.org/index.php/AAAI/article/view/21183">here</a>.</li>
+        <li><b style="color:a">[CODE]</b>: The complete code and datasets used in the experiments are also available <a target="_blank" href="https://github.com/ricardocarvalhods/diff-private-set-union">here</a>.</li>
+        <li><b style="color:a">[CITATION]</b>: To cite this work, please click <a target="_blank" href="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/files/dpsu.bib">here</a> to get the corresponding BibTex.</li>
+      </ul>
+      <br/>
+            
+      <h2>
+        Motivation: GROUP BY queries and partitions<hr style="margin-top:3px">
+      </h2>
+      <p>Consider the following table <i>tbl_patients</i> with sensitive data about patients, and suppose you want to perform the following SQL query:</p>
+      <div class="row">
+        <div class="col-md-4">
+          tbl_patients<br/>
+          <img src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/topk1.svg" />
+        </div>        
+        <div class="col-md-8">
+          Query:
+          <div class="well">
+            <b>SELECT</b> diagnosis, <b>COUNT</b>(user_id) <b>as</b> nr_users <br/>
+            <b>FROM</b> tbl_patients <br/>
+            <b>GROUP BY</b> diagnosis
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <br/>
+          <p>
+          The query above will group the results by "diagnosis", which are our <b>partitions</b>, and then count the number of "user_id" per partition.
+          </p>  
+        </div>        
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-8">
+          <p>
+            If we use standard DP mechanisms to answer this query, we would basically add noise to the total counts of each <b>partition</b>/diagnosis, and release e.g. the following result on the right:
+            <br/><br/><i>(without differentiating noise added and total count, here shown just for illustration)</i>
+          </p>
+          <p>
+            <br/><b>What is the <span style="color:red">problem</span> with releasing this result on the right?</b><br/>
+            <ul>
+              <li>In <i>tbl_patients</i> the user with id "003" is the only one that has "diabetes". Therefore, just by outputting the partition "diabetes" using a standard DP mechanism, it becomes easy to differentiate <i>tbl_patients</i> from a <a href="#tooltip" id="tooltip" disabled data-toggle="tooltip" data-placement="top" title="Neighboring datasets/tables are those that differ only by the data of any one user.">neighboring</a> table without the user with id "003", since the partition "diabetes" would <b>not</b> appear in the result without this user.</li>
+              <li>For this reason, the algorithm use above would violate differential privacy, as intuitively we should not be able to differentiate the results of neighboring datasets/tables.</li>
+          </ul>
+          </p>
+        </div>
+        <div class="col-md-4">
+            Result:<br/>
+            <img width="80%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/topk2.svg" />
+          </div>  
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <p>
+            <br/><b>How do we <span style="color:green">solve</span> this problem?</b><br/>
+            <ol>
+              <li>If you have domain knowledge (i.e. you know which partitions exist without looking at the data) you can pass the list of possible partitions and the DP mechanism would release only the result for these partitions (adding noise to them even if their total count is zero).</li>
+              <li>More generally, another option is to use a DP mechanism just to find the possible partitions and then pass these partitions to a noise-adding mechanism such as the one seen above, to release the noisy result only for such partitions.</li>
+              <ul>
+                  <li>In the literature, this approach is referenced as differentially private <b>"partition selection"</b> or <b style="color:green">"set union"</b>.</li>
+              </ul>
+            </ol>
+          </p>
+        </div>
+      </div>
+
+      <br/>
+      <h3>Defining DP Set Union (DPSU)<hr style="margin-top:3px"></h3>
+      <p>Consider we have a dataset/table $D$ with data of users.
+      <br/>Moreover, consider each user $i$ has a set of items $W_i$ (in the example above, "item" = "diagnosis").</p>
+      <p>In DPSU, our <b style="color:green;">goal</b> is to output as many items as possible as the existing items in the dataset/table from the users, while satisfying DP.
+        <br/><span class="glyphicon glyphicon-play" aria-hidden="true"></span> In other words, we want to use a DP mechanism on $D$ to output a subset $S \subseteq \cup_i \,W_i$ such that the size of $S$ is as large as possible.
+      </p>
+
+      <br/>
+      <h3>How DPSU mechanisms work<hr style="margin-top:3px"></h3>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Previous work related to DPSU 
+        [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="Korolova, A.; Kenthapadi, K.; Mishra, N.; and Ntoulas, A. 2009. Releasing search queries and clicks privately. In Proceedings of the 18th international conference on World wide web, 171–180.">1</a>, 
+        <a href="#tooltip3" id="tooltip3" disabled data-toggle="tooltip" data-placement="top" title="Wilson, R. J.; Zhang, C. Y.; Lam, W.; Desfontaines, D.; Simmons-Marengo, D.; and Gipson, B. 2020. Differentially private sql with bounded user contribution. Proceedings on Privacy Enhancing Technologies, 2020(2): 230–250.">2</a>]
+        designed mechanisms with two phases:</p>
+        <img width="100%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dpsu1.svg" />
+        <br/><br/>
+        <ul>
+          <li><b style="color:blue">Phase 1</b> builds a histogram on $\cup_i W_i$ by iterating over the users and getting their contributions in terms of items.</li>
+          <ul>
+            <li>To provide DP, the contribution of every single user needs to be bounded in terms of number of items and weights.</li>
+            <li>Thus, <b style="color:brown">STEP 1</b> samples items from $W_i$ into $\overline{W_i}$ to limit user contribution to at most $\Delta_0$ items.</li>
+            <li>In <b style="color:brown">STEP 2</b> a total weight budget of $1$ is distributed among the items in $\overline{W_i}$, and the histogram is updated for each item in $\overline{W_i}$.</li>
+          </ul>
+          <li>After Phase 1, which runs the two steps above for all existing users, a histogram $H$ is built.</li>
+          <li><b style="color:blue">Phase 2</b> takes as input the histogram $H$ constructed in the previous phase.</li>
+          <ul>
+            <li><b style="color:brown">STEP 3</b> adds noise to the total weights of each item in the histogram.</li>
+            <li>Finally, in <b style="color:brown">STEP 4</b>, only items with a noisy weight above the threshold $\rho$ will be outputted.</li>
+          </ul>
+        </ul>
+        </div>
+      </div>
+
+
+
+      <br/>
+      <h3 style="color:green">Our Contributions to DPSU<hr style="margin-top:3px"></h3>
+      <p>Our work introduced the following improvements over previous DPSU mechanisms:</p>
+      <div class="row">
+        <ul>
+          <li><b>Introducing item frequency</b>
+            <ul>
+              <li>All previous works treat $W_i$ as a set of distinct items, ignoring items' frequencies for the user $i$ when available.</li>
+              <li>For example, for our patient/diagnosis scenario above (where "item" = "diagnosis"), a patient could have the same diagnosis multiple times (e.g. a cancer that reappears), but previous works represent each user by a set of distinct items.</li>
+              <li>Our first contribution is <b style="color:green">introducing an item frequency array</b> $C_i$ associated with the items in $W_i$.</li>
+              <li>The goal is to use $C_i$ to output more items in the set union while meeting DP.</li>
+            </ul>
+          </li>
+          <li><b>Eliminating sampling</b>
+            <ul>
+              <li>All previous works implement STEP 1 in the image above using uniform sampling.</li>
+              <li>Uniform sampling tends to waste the weight budget on updating items that occur among many users, as such items do not require many updates to reach the threshold $\rho$.</li>
+              <li>We introduce a mechanism that eliminates the need for sampling in STEP 1.</li>
+              <li>By eliminating sampling, each user $i$ moves on to STEP 2 with <b>all</b> items $W_i$.</li>
+              <li>This means that, unlike previous work, we do <b>not</b> need to set the $\Delta_0$ parameter, which would cost additional privacy budget to choose privately.</li>
+              <li>To the best of our knowledge, this is the <b style="color:green">first work that eliminates the sampling step.</b></li>
+            </ul>  
+          </li>
+          <li><b>DP greedy update</b>:
+            <ul>
+              <li>[<a href="#tooltip4" id="tooltip4" disabled data-toggle="tooltip" data-placement="top" title="Gopi, S.; Gulhane, P.; Kulkarni, J.; Shen, J. H.; Shokouhi, M.; and Yekhanin, S. 2020. Differentially private set union. International Conference on Machine Learning (ICML).">3</a>] shows that some well thought greedy update for STEP 2 does <b>not</b> satisfy DP.</li>
+              <li>We propose a novel update algorithm for STEP 2 that follows a <i>greedy</i> approach guided by the item frequency $C_i$ for each user $i$.</li>
+              <li>However, our <i>greedy</i> update provably satisfies DP and enables a <b style="color:green">smaller threshold $\rho$</b> compared to [<a href="#tooltip5" id="tooltip5" disabled data-toggle="tooltip" data-placement="top" title="Gopi, S.; Gulhane, P.; Kulkarni, J.; Shen, J. H.; Shokouhi, M.; and Yekhanin, S. 2020. Differentially private set union. International Conference on Machine Learning (ICML).">3</a>]. </li>
+              <li>The reduced threshold increases the probability of outputting more items.</li>
+            </ul>
+          </li>
+          <li><b>Knowledge transfer</b>:
+            <ul>
+              <li>Looking at the data of each individual user $i$ to get the frequency array $C_i$ may not reflect the global frequency distribution for all users.</li>
+              <li>On the other hand, getting $C_i$ by aggregating all users’ sensitive data would not satisfy DP.</li>
+              <li>To address this issue, we propose a <b style="color:green">variant of our mechanism with knowledge transfer</b> that uses the frequency of items in the histogram built from a <b>public</b> dataset.</li>
+            </ul>
+          </li>
+        </ul>
+        
+      </div>
+      <p>In experiments, compared to the previous state-of-the-art in DPSU, our mechanisms had <b style="color:blue">utility improvements of up to 25%</b>.</p>
+
+
+    </div>
+  </body>
+</html>
