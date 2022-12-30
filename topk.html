@@ -117,7 +117,7 @@
     <div class="row">
         <div class="col-md-12">
           <p>
-            There are a few options for DP selection mechanisms, with the <b>Exponential Mechanism (EM)</b> [CITE] being one of the most used.
+            There are a few options for DP selection mechanisms, with the <b>Exponential Mechanism (EM)</b> [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Frank McSherry and Kunal Talwar. Mechanism design via differential privacy. In FOCS, volume 7, pages 94–103, 2007.">1</a>] being one of the most used.
             <ul>
               <li>Using EM, we select some element $i$ from a dataset $D$ with probability: $\Pr[EM(D)=i] \propto \exp(\frac{\varepsilon \cdot f(i,D)}{2\cdot \Delta f})$</li>
               <li>So in practice we have a <b>random selection</b> with a probability of selection for every element in the <b>full domain of elements</b> (i.e. all known/existing elements - the image above shows the full domain of the example).</li>
@@ -141,7 +141,7 @@
                 <li>This means normalizing probabilities of 1 million elements 10 times, and then also running a random selection 10 times.</li>
                 <li>It easy to see that this iterative process is <b>not</b> practical for real-world systems, especially when the selection is part of a larger and more complex analysis pipeline.</li>                
               </ul>
-              <li>There is an equivalent approach in the literature [CITE] that is more efficient:</li>
+              <li>There is an equivalent approach in the literature [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="David Durfee and Ryan Rogers. Practical differentially private top-k selection with pay-what-you-get composition. In NeurIPS, pages 3527–3537, 2019.">2</a>] that is more efficient:</li>
               <ul>
                 <li>It adds Gumbel noise once to all 1 million scores, then sorts the noisy score and returns the 10 elements with highest noisy scores.</li>
                 <li>However, even this one-shot approach can still be time consuming for large datasets.</li>
@@ -156,7 +156,7 @@
           <p>
             <b>How can we improve the computational efficiency of DP top-k selection?</b><br/>
             <ul>
-              <li>To address computational efficency within DP top-k selection, [CITE] proposed selecting elements from a <b>restricted domain</b>, which we explain below.</li>
+              <li>To address computational efficency within DP top-k selection, [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="David Durfee and Ryan Rogers. Practical differentially private top-k selection with pay-what-you-get composition. In NeurIPS, pages 3527–3537, 2019.">2</a>] proposed selecting elements from a <b>restricted domain</b>, which we explain below.</li>
             </ul>
           </p>          
         </div>
@@ -246,7 +246,7 @@
           <ul>
             <li>The novelty is that our framework can be used to easily create new restricted domain mechanisms from <b>any</b> traditional DP top-$k$ mechanism, while guaranteeing DP for the full domain by default and without needing any additional DP proof.</li>  
             <li>Therefore, our approach <b>eliminates the hassle</b> involved in the DP analysis of individual mechanisms.</li>
-            <li>This means that every time a new traditional DP selection mechanism is proposed in the literature, e.g. [McKenna, OneShot], we can already directly leverage it on restricted domain by using our framework.</li>
+            <li>This means that every time a new traditional DP selection mechanism is proposed in the literature, e.g. [<a href="#tooltip3" id="tooltip3" disabled data-toggle="tooltip" data-placement="top" title="Ryan McKenna and Daniel R Sheldon. Permute-and-flip: A new mechanism for differentially private selection. Advances in NeurIPS 2020.">3</a>, <a href="#tooltip4" id="tooltip4" disabled data-toggle="tooltip" data-placement="top" title="Gang Qiao, Weijie Su, and Li Zhang. Oneshot differentially private top-k selection. In International Conference on Machine Learning, pages 8672–8681. PMLR, 2021.">4</a>], we can already directly leverage it on restricted domain by using our framework.</li>
           </ul>
           
           
@@ -256,10 +256,10 @@
       <div class="row">
         <div class="col-md-12">
           <br/>
-          <p>Aside from being practical, our framework also have better utility (<b>formally proven</b>) compared to previous restricted domain mechanisms.</p>
+          <p>Aside from being practical, our framework also have better utility (<b>formally proven</b>) compared to previous restricted domain mechanisms [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="David Durfee and Ryan Rogers. Practical differentially private top-k selection with pay-what-you-get composition. In NeurIPS, pages 3527–3537, 2019.">2</a>].</p>
           <ul>
             <li>Moreover, our experiments confirm the improved utility on multiple datasets and settings.</li>
-            <li>Some settings show our framework returning <b style="color:blue">three times more elements</b> than previous restricted domain mechanisms.</li>
+            <li>Some settings show our framework returning <b style="color:blue">three times more elements</b> than previous restricted domain mechanisms [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="David Durfee and Ryan Rogers. Practical differentially private top-k selection with pay-what-you-get composition. In NeurIPS, pages 3527–3537, 2019.">2</a>].</li>
           </ul>
           <br/>
           <p>
