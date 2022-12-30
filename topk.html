@@ -1,1 +1,277 @@
-<span><b>Under construction!</b> - Come back soon..</span>
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+    
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+    <style type="text/css">      
+      .date_td {
+        width:120px;
+        text-align:right;
+        padding-right:20px !important;
+      }
+      .big-icon {
+        font-size: 24px;
+        padding-right: 5px;
+      }
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, “Helvetica Neue”, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
+        /* default is 1rem or 16px */
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      /* Increase all font sizes on mobile */
+      @media (max-width: 767px) { 
+
+      body {
+        /* default is 1rem or 16px */
+        font-size: 16px;
+      }
+    </style>
+    
+    <title>Ricardo Silva Carvalho</title>
+    
+  </head>
+  <body>
+    
+    <div class="container">
+      <br/>
+      <h1>Differentially Private Top-k Selection<hr></h1>
+      <p>In this topic, my research focuses on making DP top-k selection viable and <b>easy-to-use</b> as part of <b>scalable</b> systems.
+      </p>
+      <ul>
+        <li><b style="color:a">[PAPERS]</b>: Part of the work described below (the framework) is <u>under review</u>, and can be shared upon request. Another part (restricted domain) was published at <b>UAI 2020</b> and can be found <a target="_blank" href="http://auai.org/uai2020/proceedings/459_main_paper.pdf">here</a>.</li>
+        <li><b style="color:a">[CODE]</b>: The complete code and datasets used in the UAI paper are also available <a target="_blank" href="https://github.com/ricardocarvalhods/diff-priv-top-k-stability">here</a>.</li>
+        <li><b style="color:a">[CITATION]</b>: To cite the work published at UAI 2020, please click <a target="_blank" href="https://github.com/ricardocarvalhods/ricardocarvalhods.github.io/blob/master/files/topk_uai.bib">here</a> to get the corresponding BibTex.</li>
+      </ul>
+      <br/>
+            
+      <h2>
+        Defining DP top-k selection<hr style="margin-top:3px">
+      </h2>
+      <p>Consider a dataset from users, where each user has a set of binary elements, where a value of 1 indicates the presence of the element. Moreover, we can define a "score" for every element, which denotes its importance in the dataset, as the sum of the values of the element for all the users.</p>
+      <p>Below we an example of such dataset:</p>
+      <div class="row">
+        <div class="col-md-7">
+          <img width="100%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptopk1.svg" />
+        </div>
+      </div>
+      <br/>
+      <p>Elements can be for example:
+      <ul>
+        <li><b>Symptoms</b>: a value of 1 indicates the existence of the symptom for that user/patient.</li>
+        <li><b>Products</b>: a value of 1 indicates that the user purchased the product.</li>
+        <li><b>Pages</b>: a value of 1 indicates that the user visited the page.</li>
+        <li><b>Photos</b>: a value of 1 indicates that the user liked the photo</li>
+      </ul>
+      </p>
+    <p>The histogram we see above on the right is then showing the <b>score</b> of the elements (i.e. sum of each column).</p>
+    <ul>
+      <li>So a <b>top-k selection</b> is interested in the <b>most valuable</b> elements, i.e. the elements with the <b>highest scores</b>.</li>
+      <li>For example, a top-3 selection in the example above (without considering privacy) would return $[F,C,G]$.</li>
+      <li>Moreover, taking <b>privacy</b> into account, we want to select the top-k such that the result is not giving away the presence of elements of any specific user.</li>
+    </ul>
+    <div class="row">
+        <div class="col-md-12">
+          <p>
+            There are a few options for DP selection mechanisms, with the <b>Exponential Mechanism (EM)</b> [CITE] being one of the most used.
+            <ul>
+              <li>Using EM, we select some element $i$ from a dataset $D$ with probability: $\Pr[EM(D)=i] \propto \exp(\frac{\varepsilon \cdot f(i,D)}{2\cdot \Delta f})$</li>
+              <li>So in practice we have a <b>random selection</b> with a probability of selection for every element in the <b>full domain of elements</b> (i.e. all known/existing elements - the image above shows the full domain of the example).</li>
+              <li>Moreover, the random <b>selection is biased towards elements with high score</b> (which is want we want), and we also have DP guaranteed (going into details of EM is out of scope now).</li>
+              <li>To select k elements, we simply use EM iteratively, renormalizing probabilities and removing elements selected at every iteration.</li>
+          </ul>
+          </p>
+        </div>
+    </div>
+    <h2>
+        Motivation: Efficiency of DP top-k selection<hr style="margin-top:3px">
+    </h2>
+    
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+            Now consider a dataset with 1 million elements to select the top-10. How do we do this with DP?
+            <ul>
+              <li>As mentioned above we can apply EM 10 times</li>
+              <ul>
+                <li>This means normalizing probabilities of 1 million elements 10 times, and then also running a random selection 10 times.</li>
+                <li>It easy to see that this iterative process is <b>not</b> practical for real-world systems, especially when the selection is part of a larger and more complex analysis pipeline.</li>                
+              </ul>
+              <li>There is an equivalent approach in the literature [CITE] that is more efficient:</li>
+              <ul>
+                <li>It adds Gumbel noise once to all 1 million scores, then sorts the noisy score and returns the 10 elements with highest noisy scores.</li>
+                <li>However, even this one-shot approach can still be time consuming for large datasets.</li>
+                <li>In fact, we saw that, without considering the time to access the database, (i.e. only counting the time for the private top-k selection) this approach takes around <b>0.5 seconds</b> to do a <b>DP top-10</b> selection on a dataset with <b>one million elements</b>.</li>
+              </ul>
+            </ul>
+          </p>
+      </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <p>
+            <b>How can we improve the computational efficiency of DP top-k selection?</b><br/>
+            <ul>
+              <li>To address computational efficency within DP top-k selection, [CITE] proposed selecting elements from a <b>restricted domain</b>, which we explain below.</li>
+            </ul>
+          </p>          
+        </div>
+      </div>
+
+      <h2>
+        Restricted domain<hr style="margin-top:3px">
+      </h2>
+      <div class="row">
+        <div class="col-md-8">
+          <p><b>Restricted domain</b> top-k mechanisms select k elements by choosing from the elements that have the top-$\bar{k}$ scores, for a chosen $\bar{k} \geq k$. The image on the right illustrates this setting.</p>          
+          <ul>
+            <li>This means only processing $\bar{k}$ elements, instead of the full domain (as it was with EM).</li>
+            <li>This improves computational efficiency dramatically.</li>
+            <li>In fact, our experiments showed DP top-k selection on restricted domain up to <b>200 times faster</b> than traditional DP selection.</li>
+          </ul>
+          <p>
+            <b>What is the <b style="color:red">problem</b> with DP top-k selection on Restricted domain?</b><br/>
+            <ul>
+              <li>DP mechanisms working on restricted domain still need to provide DP guarantees for the <b>full domain</b> of all elements.</li>
+              <ul>
+                <li>That's because the restricted domain itself (i.e. the top-$\bar{k}$ elements) is <b>sensitive</b>.</li>
+                <li>Therefore, simply enforcing DP on the restricted domain is <b>not</b> sufficient to guarantee privacy.</li>
+                <li>Moreover, proving DP on the full domain when accessing only the restricted domain is a <b>really complex</b> task.</li>
+              </ul>              
+            </ul>
+          </p>
+        </div>
+        <div class="col-md-4">
+          <img width="110%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptopk2.svg" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <ul>
+            <li>In this context, the current approach is to start with a traditional DP top-k mechanism, and modify it such that it maintains the DP guarantee on the full domain while only selecting from the restricted domain.</li>
+              <ul>
+                <li>The <b style="color:red">problem</b> with this approach is that you have to go through a <b>complex DP analysis</b> <u>for every DP top-k mechanism you want to use on restricted domain.</u></li>
+                <li>This <b>limits the applicability</b> of restricted domain mechanisms, especially because new improved top-k mechanisms are being proposed every year.</li>
+                <li>Therefore, a highly practical setting (restricted domain selection) becomes of limited use in practice.</li>
+              </ul>
+          </ul>
+          <p>
+            <b>How can we <span style="color:green">solve</span> this problem?</b><br/>
+            <ol>
+              <li>In our work, we propose a "<b>framework</b>" that takes a novel <b style="color:green">mechanism-agnostic</b> approach to create restricted domain mechanisms (which we detail next).</li>
+              <ul>
+                <li>We develop an easy-to-use framework to allow <b>any</b> DP top-k mechanism to be used on restricted domain.</li>
+                <li>Our framework guarantees <b>DP for the full domain by default</b>, therefore it does <b>not</b> need any additional DP proof.</li>
+              </ul>
+            </ol>
+          </p>
+        </div>
+    </div>
+          
+      <h2 style="color:green">
+        Our framework to make DP top-k selection practical<hr style="margin-top:3px">
+      </h2>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Our "framework" for differentially private top-k selection aims to be highly practical.</p>
+          <ul>
+            <li>It takes <b>as a black-box</b> any given DP top-$k$ mechanism and automatically "converts" it into a <b>restricted domain</b> mechanism.</li>
+            <li>The framework provides a <b>unified proof of privacy</b> "for free", which is already valid by default for any given mechanism.</li>
+            <li>This property greatly simplifies adoption in practice, as it eliminates the need for any privacy analysis to work on restricted domain.</li>
+          </ul>
+          
+          <p>The framework can be built on top of any regular database system without internal modification, leveraging existing optimized data infrastructure. See the image below.</p>
+          
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <img src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptopk3.svg" />
+        </div>
+        <div class="col-md-9">
+          <ol>
+            <li>When a user requests DP top-$k$ queries.</li>
+            <li>Our framework first queries the database system.</li>
+            <li>The database returns the true top-$\bar{k}$ elements.</li>
+            <ul>
+              <li>Then the framework applies, as a blackbox, any traditional DP top-$k$ selection mechanism to the top-$\bar{k}$ together with additional private computation.</li>
+            </ul>
+            <li>Finally it returns at most $k$ elements while guaranteeing DP by default for the full domain.</li>
+          </ol>
+
+          <ul>
+            <li>The novelty is that our framework can be used to easily create new restricted domain mechanisms from <b>any</b> traditional DP top-$k$ mechanism, while guaranteeing DP for the full domain by default and without needing any additional DP proof.</li>  
+            <li>Therefore, our approach <b>eliminates the hassle</b> involved in the DP analysis of individual mechanisms.</li>
+            <li>This means that every time a new traditional DP selection mechanism is proposed in the literature, e.g. [McKenna, OneShot], we can already directly leverage it on restricted domain by using our framework.</li>
+          </ul>
+          
+          
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+          <p>Aside from being practical, our framework also have better utility (<b>formally proven</b>) compared to previous restricted domain mechanisms.</p>
+          <p>So our experiments confirm the improved utility on multiple datasets and settings.</p>
+          <ul>
+            <li>Some settings show our framework returning <b style="color:blue">three times more elements</b> than previous restricted domain mechanisms.</li>
+          </ul>          
+          <p>
+            In summary, our framework has <b style="color:green">four main advantages that make it highly practical</b>:
+            <ol>
+              <li>It adapts traditional DP top-k mechanisms to <b>restricted domain automatically</b>, without needing any DP proof.</li>
+              <li>By selecting from a restricted domain, it is <b>computationally efficient</b> (e.g. 200 times faster than one-shot full domain approaches).</li>
+              <li>Has <b>better utility</b> compared to previous restricted domain mechanisms (e.g. returning three times more elements)</li>
+              <li>Can be <b>directly used on top of any database system</b>, without needing to modify such system.</li>
+          </ol>
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </body>
+</html>
