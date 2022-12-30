@@ -164,8 +164,8 @@
           <li role="presentation"><a data-toggle="pill" href="#menu_dpsu"><b><span class="glyphicon glyphicon-object-align-right" aria-hidden="true"></span>&nbsp; DP SQL Queries</b></a></li>
           <li role="presentation"><a data-toggle="pill" href="#menu_topk"><b><span class="glyphicon glyphicon-sort-by-attributes-alt" aria-hidden="true"></span>&nbsp; DP Top-k Selection</b></a></li>
           
-          <!--<li role="presentation"><a data-toggle="pill" href="#menu_text"><b><span class="glyphicon glyphicon-random" aria-hidden="true"></span>&nbsp; DP Text</b></a></li>
-          <li role="presentation"><a data-toggle="pill" href="#menu_synth"><b><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>&nbsp; DP Synthetic Data <span style="background-color:yellow;color:dark-gray;border-style:solid;border-width:1px;" class="btn-xs" aria-hidden="true" disabled>Updated!</span></b></a></li>-->
+          <li role="presentation"><a data-toggle="pill" href="#menu_text"><b><span class="glyphicon glyphicon-random" aria-hidden="true"></span>&nbsp; DP Text</b></a></li>
+          <!--<li role="presentation"><a data-toggle="pill" href="#menu_synth"><b><span class="glyphicon glyphicon-equalizer" aria-hidden="true"></span>&nbsp; DP Synthetic Data <span style="background-color:yellow;color:dark-gray;border-style:solid;border-width:1px;" class="btn-xs" aria-hidden="true" disabled>Updated!</span></b></a></li>-->
           
           <li role="presentation"><a data-toggle="pill" href="#menu_activities"><b><span class="glyphicon glyphicon-tags" aria-hidden="true"></span>&nbsp; Others</b></a></li>
         </ul>
@@ -312,14 +312,26 @@
       </div>
       <div id="menu_text" class="tab-pane">
         <div class="col">
-          <br/>
-          <span>Privatizing text</span>
+          <script> 
+            $(document).ready(function(){
+              $(function(){
+                $("#page_dptext").load("dptext.html"); 
+              });
+            });
+          </script>
+          <div id="page_dptext"></div>
         </div>
       </div>
       <div id="menu_synth" class="tab-pane">
         <div class="col">
-          <br/>
-          <span>Private Synthetic Data Generation</span>
+          <script> 
+            $(document).ready(function(){
+              $(function(){
+                $("#page_synth").load("synth.html"); 
+              });
+            });
+          </script>
+          <div id="page_synth"></div>
         </div>
       </div>
       </div>
