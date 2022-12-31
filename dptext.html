@@ -1,3 +1,267 @@
-<p>
-  <b>Under construction!</b> - Come back soon..  
-</p>
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        
+    
+    <script>
+    $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+    });
+    </script>
+    
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']]
+      }
+    };
+    </script>
+    <script id="MathJax-script" async
+      src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+    </script>
+
+    <style type="text/css">      
+      .date_td {
+        width:120px;
+        text-align:right;
+        padding-right:20px !important;
+      }
+      .big-icon {
+        font-size: 24px;
+        padding-right: 5px;
+      }
+      body {
+        padding-top: 20px;
+        padding-bottom: 40px;
+      }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, “Segoe UI”, Roboto, “Helvetica Neue”, Arial, sans-serif, “Apple Color Emoji”, “Segoe UI Emoji”, “Segoe UI Symbol”;
+        /* default is 1rem or 16px */
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1.5;
+      }
+
+      /* Increase all font sizes on mobile */
+      @media (max-width: 767px) { 
+
+      body {
+        /* default is 1rem or 16px */
+        font-size: 16px;
+      }
+    </style>
+    
+    <title>Ricardo Silva Carvalho</title>
+    
+  </head>
+  <body>
+    
+    <div class="container">
+      <br/>
+      <h1>Differentially Private Text<hr></h1>
+      <p>In Natural Language Processing (NLP), my research focuses on improving the utility of DP text generation algorithms.
+      </p>
+      <ul>
+        <li><b style="color:a">[PAPERS]</b>: Part of the work described below was published at <b>ML4Data/ICML 2021</b> and is available <a target="_blank" href="https://arxiv.org/abs/2107.07923">here</a>. Another part will be published at <b>SDM 2023</b> and a preview can be found <a target="_blank" href="https://arxiv.org/abs/2107.07928">here</a>.</li>
+        <li><b style="color:a">[CODE]</b>: Code will be released soon.</li>
+        <li><b style="color:a">[CITATION]</b>: To cite the work published at ML4Data/ICML 2021, please use <a target="_blank" href="https://github.com/ricardocarvalhods/ricardocarvalhods.github.io/blob/master/files/brr.bib">this BibTex</a>, and for the work to be published at SDM 2023, please use <a target="_blank" href="https://github.com/ricardocarvalhods/ricardocarvalhods.github.io/blob/master/files/tem.bib">this BibTex</a>.</li>
+      </ul>
+      <br/>
+            
+      <h2>
+        Defining Text Privatization<hr style="margin-top:3px">
+      </h2>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Consider we have a dataset of users, where each user has a set of words.</p>
+          <ul>
+            <li>In this setting, we consider potential privacy problems with <b>one sensitive word per user</b>.</li>
+            <li>The idea is to replace each sensitve word by a new word that <b>cannot</b> be easily linked back to the original word, thus <b>improving privacy</b>.</li>
+            <li>Additionally, we want to <b>keep the context</b> of the sentence.</li>
+          </ul>
+            
+
+          <p>Below we an example of such dataset:</p>
+          <center><img src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptext1.svg" /></center>
+          <br/>
+          <p>Thus, in this setting, we are protecting users at the <b>individual word</b> level.</p>
+          <ul>        
+            <li>Our main <b style="color:blue">goal</b> is to take an input word and perturb it to obtain an output word that would be indistinguishable from the input word.</li>
+            <ul>
+              <li>i.e. an adversary that sees the output word would <b>not</b> be able to tell the input word with high probability, which in turn protects the user's identity.</li>
+            </ul>
+            <li>But we also intentionally want to maintain the original context that can be observed by the aggregation of words from each user.</li>
+            <ul>
+              <li>i.e. we are still interested in the Context for, e.g., <b>Intent Classification</b>, in a downstream NLP task.</li>  
+            </ul>            
+            <li>Note that we could also privatize all words in a sentence, while still keeping the context, with similar results.</li>
+          </ul>
+          <p>It is no surprise that disclosing just a single word is enough to impact a user's privacy, as it may represent a password, disease diagnosis or political preference. So this is a really important problem to address.</p>
+        </div>
+      </div>
+      
+      <h2>
+        How Text Privatization works<hr style="margin-top:3px">
+      </h2>
+      <div class="row">
+        <div class="col-md-12">
+          <p>For text privatization, standard DP approaches do <b>not</b> work well in the context above.</p>
+          <ul>
+            <li>For standard DP to work, we would have to ensure that a word can be replaced by <b>any</b> other word in the vocabulary</li>
+            <li>This would potentially ruin the utility of any DP algorithm by adding an excessive amount of noise.</li>
+          </ul>
+          
+          <p>To deal with this issue, previous research [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and Tom Diethe. Privacy- and utility-preserving textual analysis via calibrated multivariate perturbations. In WSDM ’20, page 178–186, New York, NY, USA, 2020.">1</a>] has proposed two modifications:</p>
+          <ol>
+            <li>Privatize words in the continuous <b>embedding space</b>.</li>
+            <li>Use a generalization of DP for metric spaces called <b>metric differential privacy (mDP)</b> [<a href="#tooltip2" id="tooltip2" disabled data-toggle="tooltip" data-placement="top" title="Konstantinos Chatzikokolakis, Miguel E Andres, Nicolas Emilio Bordenabe, and Catuscia Palamidessi. Broadening the scope of differential privacy using metrics. In International Symposium on Privacy Enhancing Technologies Symposium, pages 82–102. Springer, 2013.">2</a>]</li>
+          </ol>
+          
+          <p>See below an example of <b>word embeddings</b> where each user's data is a word with their home city.</p>
+          <center><img src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptext2.svg" /></center>
+          <ul>
+            <li>For each word, we perform a lookup in the embedding space (in this case 2-dimensional) and the word embedding is the returned vector numerically representing each word.</li>  
+          </ul>
+          
+          <br/>
+          <p>Using mDP, previous methods [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and Tom Diethe. Privacy- and utility-preserving textual analysis via calibrated multivariate perturbations. In WSDM ’20, page 178–186, New York, NY, USA, 2020.">1</a>] generally work with three main steps as we see in the image below.</p>
+          <center><img width="75%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/dptext3.svg" /></center>
+          
+          <ol>
+            <li>First, they <b>retrieve</b> the embedding vector of the input word that needs to be privatized.</li>
+            <li>In the second step, the vector is <b>perturbed</b> by, for example, adding random noise.</li>
+            <li>Finally, as a noisy vector is unlikely to exactly represent a valid word, the output is the word that is closest to the noisy vector (obtained via <b>nearest neighbor search</b> in the representation space).</li>  
+          </ol>
+          
+          <p>
+            <b>What are the <b style="color:red">problems</b> with the privatization approach above?</b><br/>
+
+            <ul>
+              <li>That approach considers the representation space as <b>non</b>-sensitive (i.e. public), as it does <b>not</b> account for privacy loss in the nearest neighbor search (STEP 3).</li>
+              <li>Moreover, each existing mechanism assumes one <b>specific distance metric</b> (e.g. Euclidean in [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and Tom Diethe. Privacy- and utility-preserving textual analysis via calibrated multivariate perturbations. In WSDM ’20, page 178–186, New York, NY, USA, 2020.">1</a>]) is being used when proving DP.</li>
+              <li>Also, the approach would <b>not</b> be viable to privatize text on-device, due to large storage and computational requirements.</li>
+              <li>Finally, the noise added to a vector does <b>not</b> take into account the density of the region that the vector lies in, which tends to reduce utility.</li>
+              <ul>
+                <li>For example, if a word is on a highly dense area in the embedding space, the noise added could be small, as the word already has some indistinguishability.</li>
+                <li>However, the current mechanisms do <b>not</b> adapt the noise depending on the area of the word embedding vector being privatized.</li>                
+              </ul>              
+            </ul>              
+          </p>
+        
+          <p>
+            <b>How do we <span style="color:green">solve</span> the problems above?</b><br/>
+            <ol>
+              <li>In our work shown below, instead of seeing text privatization as a vector perturbation problem, <b style="color:green">we pose the task as a selection problem</b>.</li>
+              <li>Additionally, we use binary embeddings and optimized nearest-neighbors search, to make our approach possible to be used on-device.</li>
+              <ul>
+                <li>These two modifications will solve all the problems described above, as we detail next.</li>
+              </ul>
+            </ol>
+          </p>
+      
+      </div>
+    
+      <h2 style="color:green">
+        Our contributions to text privatization<hr style="margin-top:3px">
+      </h2>
+      <div class="row">
+        <div class="col-md-12">
+          <p>Our approach to text privatization is completely different from previous work: we pose the problem as a <b>selection</b> task.</p>
+          <ul>
+            <li>Instead of perturbing an input embedding vector, our method selects an output from a set of possible candidates</li>
+            <li>For the candidates, the words <b>closer to the input word</b> in the metric space will have <b>higher probability</b> of being selected.</li>
+            <li>Moreover, our work <b>adapts the probabilities</b> of words being selected <b>to the regions</b> of a given input word, basically adjusting the randomness for better utility.</li>
+            <ul>
+              <li>We illustrate and detail this last property now:</li>
+            </ul>
+          </ul>
+          <p>See the following image as an example:</p>
+        </div>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-4">
+        <center><i>Example of embedding space</i><br/></center>
+        <img width="100%" src="https://raw.githubusercontent.com/ricardocarvalhods/ricardocarvalhods.github.io/master/images/density.png" />
+      </div>
+      <div class="col-md-8">
+        <ul>
+          <li>Let the image on the left be a two-dimensional embedding space, with a few vectors represented as dots.</li>
+          <li>In previous work, the perturbation method was the same for all vectors, including both the red and the green embedding vectors.</li>
+          <li>On the other hand, our approach <b>adds less randomness/noise to high density areas</b> (<b style="color:red">red vector</b>) and also <b>adds more randomness/noise to low density areas</b> (<b style="color:green">green vector</b>).</li>
+          <li>This <b style="color:blue">dynamic noise behavior</b>, adapted to the density, intuitively makes sense:</li>
+          <ul>
+              <li>The high density areas (red vector) already have vectors that are somewhat indistinguishable, so less randomness is required.</li>
+             <li>In other words, if you add small noise to the red vector, it is already hard to know which of the vectors in that area was the actual input.</li>
+            <li>However, if you add small noise to the green vector (low density area), then it is still easy to identify it as the input - so more noise is required here to make the output indistinguishable.</li>
+          </ul>
+          <li>This more-efficient randomness adaptation approach led to <b style="color:blue">42% better utility</b> than previous work [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and Tom Diethe. Privacy- and utility-preserving textual analysis via calibrated multivariate perturbations. In WSDM ’20, page 178–186, New York, NY, USA, 2020.">1</a>].</li>
+        </ul>
+      </div>
+    </div>
+  
+    <div class="row">
+      <div class="col-md-12">
+        <p>Moreover, as usual on selection problems, we do <b>not</b> release the scores, just the selected element.</p>
+        <ul>
+          <li>Therefore, unlike previous work, the <b>embedding space can be sensitive</b>, as they are used to define the scores.</li>
+          <li>Moreover, the mechanisms do <b>not</b> depend on the distance metric used to define the scores.</li>
+          <ul>
+            <li>This means we can use <b>any</b> distance metric, and the mDP guarantee will still hold.</li>
+          </ul>          
+        </ul>
+        
+        
+        <p>As mentioned above we also use binary embeddings to represent the words.</p>
+        <ul>
+          <li>We use recent research [<a href="#tooltip3" id="tooltip3" disabled data-toggle="tooltip" data-placement="top" title="Julien Tissier, Christophe Gravier, and Amaury Habrard. Near-lossless binarization of word embeddings. In AAAI '19, volume 33, pages 7104–7111, 2019.">3</a>] that converts real-valued embedding vectors into binary representations, explicitly aiming at keeping the semantic meaning while transforming representations.</li>
+          <ul>
+            <li>They show binary embeddings <b>losing only approximately 2% in semantics</b>, but with the upside of <b>reducing the embeddings' size by 97%</b>.</li>
+            <li>They use an <b>autoencoder</b> model, where an encoder binarizes the real-valued word vector and a decoder reconstructs such input vector - so the binarized vector is the latent representation of the autoencoder.</li>
+          </ul>
+          <li>Another advantage is that binary data leverages <b style="color:green">hardware-level optimizations for nearest neighbors search</b>.</li>
+          <li>Additionally, we can implement randomization with efficient operations such as XOR.</li>
+          <li>These properties allow <b>privatization on-device</b>, as showed in our experiments:</li>
+          <ul>
+            <li>The required disk space for the <b style="color:blue">embeddings decreased 98%</b> compared to previous work [<a href="#tooltip1" id="tooltip1" disabled data-toggle="tooltip" data-placement="top" title="Oluwaseyi Feyisetan, Borja Balle, Thomas Drake, and Tom Diethe. Privacy- and utility-preserving textual analysis via calibrated multivariate perturbations. In WSDM ’20, page 178–186, New York, NY, USA, 2020.">1</a>].</li>
+            <li><b style="color:blue">Execution time decreased by 68%</b> compared to previous work.</li>
+          </ul>
+        </ul>
+        
+        <br/>
+        <p>Therefore, our approach has the following <b style="color:green">THREE main practical advantages</b>:</p>
+        <ul>
+          <li>It allows <b>text privatization on-device</b> (fast execution time and small storage requirement)</li>
+          <li><b>Improved utility</b> with density-aware randomness</li>
+          <li>More <b>flexibility of use</b> in practice: allows the use of sensitive embeddings and any distance metric.</li>
+        </ul>
+        <br/>
+        
+      </div>
+    </div>
+
+    </div>
+  </body>
+</html>
